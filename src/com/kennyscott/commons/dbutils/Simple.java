@@ -126,6 +126,11 @@ public class Simple {
 	}
 
 	/**
+	 * Standard no-arg constructor.  Totally unnecessary.
+	 */
+	public Simple () {}
+	
+	/**
 	 * I get tired of typing System.out.println()
 	 * 
 	 * @param text
