@@ -1,6 +1,7 @@
 package com.kennyscott.commons.dbutils;
 
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -8,6 +9,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
@@ -54,6 +56,7 @@ public class Simple {
 		try {
 			dataSource = this.getDataSource();
 			this.simpleSelect(dataSource);
+			this.beanSelect(dataSource);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -85,11 +88,11 @@ public class Simple {
 	 * @throws SQLException
 	 */
 	private void simpleSelect(DataSource dataSource) throws SQLException {
-		ResultSetHandler<List<Object[]>> foo = new ArrayListHandler();
+		ResultSetHandler<List<Object[]>> rsh = new ArrayListHandler();
 
-		QueryRunner run = new QueryRunner(dataSource);
+		QueryRunner queryRunner = new QueryRunner(dataSource);
 
-		List<Object[]> result = run.query("SELECT * FROM Person WHERE name=?", foo, "John Doe");
+		List<Object[]> result = queryRunner.query("SELECT * FROM Person WHERE name=?", rsh, "John Doe");
 		for (int i = 0; i < result.size(); i++) {
 			log("Row #" + i);
 			Object[] row = (Object[]) result.get(i);
@@ -100,7 +103,27 @@ public class Simple {
 	}
 
 	/**
+	 * Here we show how ridiculously easy it is to get the data in to a
+	 * JavaBean. Man alive, this Apache Commons DbUtils thing is awesome.
+	 * 
+	 * @param dataSource
+	 * @throws SQLException
+	 */
+	private void beanSelect(DataSource dataSource) throws SQLException {
+		ResultSetHandler<List<PersonBean>> rsh = new BeanListHandler<PersonBean>(PersonBean.class);
+
+		QueryRunner queryRunner = new QueryRunner(dataSource);
+		List<PersonBean> rows = queryRunner.query("SELECT * FROM Person WHERE name=?", rsh, "John Doe");
+		Iterator<PersonBean> i = rows.iterator();
+		while (i.hasNext()) {
+			PersonBean bean = i.next();
+			log("Name: " + bean.getName() + " Age: " + bean.getAge());
+		}
+	}
+
+	/**
 	 * I get tired of typing System.out.println()
+	 * 
 	 * @param text
 	 */
 	private void log(Object text) {
