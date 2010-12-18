@@ -14,21 +14,32 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 /**
+ * <p>
  * Basic implementation showing how to use the DbUtils package from Apache
  * Commons. It's surprisingly easy.
  * 
- * <p>First, I created a MySQL database called dbutils, and a user called dbutils
+ * <p>
+ * Starting point was:
+ * 
+ * <p>
+ * <a href="http://commons.apache.org/dbutils/examples.html">http://commons.
+ * apache.org/dbutils/examples.html</a>
+ * 
+ * <p>
+ * First, I created a MySQL database called dbutils, and a user called dbutils
  * with a password of, wait for it, dbutils. Then I created a simple table
  * called Person with 2 columns, and populated some data in it so that there was
  * at least a column called 'name' and it had multiple rows with a name of 'John
  * Doe'. This is because the query later on then SELECTs out those rows, and
  * outputs them to STDOUT.
  * 
- * <p>The table and example data I created have been dumped in to sql/testdata.sql
+ * <p>
+ * The table and example data I created have been dumped in to sql/testdata.sql
  * within this repository, so you can use that to create the same setup in your
  * MySQL server if you want to.
  * 
- * <p>To get this working yourself, you probably just want to muck around with the
+ * <p>
+ * To get this working yourself, you probably just want to muck around with the
  * values in the getDataSource() method, because at the very least, your server
  * is almost certainly not at the same IP address as mine. Maybe it is, but
  * unlikely, let's face it.
@@ -126,10 +137,11 @@ public class Simple {
 	}
 
 	/**
-	 * Standard no-arg constructor.  Totally unnecessary.
+	 * Standard no-arg constructor. Totally unnecessary.
 	 */
-	public Simple () {}
-	
+	public Simple() {
+	}
+
 	/**
 	 * I get tired of typing System.out.println()
 	 * 
