@@ -1,1 +1,14 @@
-Random guff trying out Apache Commons DbUtils
+A repository creating simple implementations showing how to use
+the Apache Commons DbUtils functionality.
+
+This project was created within Eclipse, therefore will work
+best in Eclipse.  However, you don't need to use Eclipse if you
+don't want to, it'll work fine either way.
+
+Run the Simple class, making sure that both the jar files in
+the lib/ directory are in your classpath.  It's a command line
+interface, and it outputs some basic information to STDOUT.
+
+You'll need to set up a MySQL database as described within
+the javadoc of Simple.  You'll need some data in it too, and
+again, this is described in the javadoc.
