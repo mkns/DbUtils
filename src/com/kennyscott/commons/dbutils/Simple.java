@@ -11,8 +11,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-
 /**
  * <p>
  * Basic implementation showing how to use the DbUtils package from Apache
@@ -69,29 +67,12 @@ public class Simple {
 	private void execute(String[] args) {
 		DataSource dataSource = null;
 		try {
-			dataSource = this.getDataSource();
+			dataSource = Common.getDataSource();
 			this.simpleSelect(dataSource);
 			this.beanSelect(dataSource);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * Funnily enough, this creates a DataSource and returns it. The
-	 * implementation is hardcoded to create a MysqlDataSource, as it happens.
-	 * 
-	 * @return
-	 * @throws SQLException
-	 */
-	private DataSource getDataSource() throws SQLException {
-		MysqlDataSource ds = new MysqlDataSource();
-		ds.setUser("dbutils");
-		ds.setPassword("dbutils");
-		ds.setServerName("192.168.2.201");
-		ds.setPortNumber(3306);
-		ds.setDatabaseName("dbutils");
-		return ds;
 	}
 
 	/**
@@ -109,10 +90,10 @@ public class Simple {
 
 		List<Object[]> result = queryRunner.query("SELECT * FROM Person WHERE name=?", rsh, "John Doe");
 		for (int i = 0; i < result.size(); i++) {
-			log("Row #" + i);
+			Common.log("Row #" + i);
 			Object[] row = (Object[]) result.get(i);
 			for (int j = 0; j < row.length; j++) {
-				log("Column #" + j + ": " + row[j]);
+				Common.log("Column #" + j + ": " + row[j]);
 			}
 		}
 	}
@@ -132,7 +113,7 @@ public class Simple {
 		Iterator<PersonBean> i = rows.iterator();
 		while (i.hasNext()) {
 			PersonBean bean = i.next();
-			log("Name: " + bean.getName() + " Age: " + bean.getAge());
+			Common.log("Name: " + bean.getName() + " Age: " + bean.getAge());
 		}
 	}
 
@@ -142,12 +123,4 @@ public class Simple {
 	public Simple() {
 	}
 
-	/**
-	 * I get tired of typing System.out.println()
-	 * 
-	 * @param text
-	 */
-	private void log(Object text) {
-		System.out.println(text);
-	}
 }
