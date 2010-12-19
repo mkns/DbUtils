@@ -67,7 +67,7 @@ public class Simple extends AbstractMain {
 	protected void execute(String[] args) {
 		DataSource dataSource = null;
 		try {
-			dataSource = Common.getDataSource();
+			dataSource = getDataSource();
 			this.simpleSelect(dataSource);
 			this.beanSelect(dataSource);
 		} catch (SQLException e) {

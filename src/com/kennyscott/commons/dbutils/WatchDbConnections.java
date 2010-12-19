@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import com.kennyscott.commons.dbutils.AbstractMain;
-import com.kennyscott.commons.dbutils.Common;
 
 /**
  * <p>
@@ -54,16 +53,16 @@ public class WatchDbConnections extends AbstractMain {
 		DataSource dataSource;
 		try {
 			log("Starting, about to get DataSource");
-			dataSource = Common.getDataSource();
+			dataSource = getDataSource();
 			sleep();
 			log("Got DataSource, now getting QueryRunner");
-			QueryRunner queryRunner = Common.getQueryRunner(dataSource);
+			QueryRunner queryRunner = getQueryRunner(dataSource);
 			sleep();
 			log("Got QueryRunner, going to dump rows");
-			Common.dumpRows(queryRunner, "vehicle");
+			dumpRows(queryRunner, "vehicle");
 			sleep();
 			log("Got vehicle rows, now going to get Person rows");
-			Common.dumpRows(queryRunner, "Person");
+			dumpRows(queryRunner, "Person");
 			sleep();
 			log("Done");
 		} catch (SQLException e) {

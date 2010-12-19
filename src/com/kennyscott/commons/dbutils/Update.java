@@ -42,12 +42,12 @@ public class Update extends AbstractMain {
 	 */
 	protected void execute(String[] args) {
 		try {
-			QueryRunner queryRunner = Common.getQueryRunner(Common.getDataSource());
-			log(Common.dumpRows(queryRunner, "vehicle"));
+			QueryRunner queryRunner = getQueryRunner(getDataSource());
+			log(dumpRows(queryRunner, "vehicle"));
 			this.doUpdate1(queryRunner);
-			log(Common.dumpRows(queryRunner, "vehicle"));
+			log(dumpRows(queryRunner, "vehicle"));
 			this.doUpdate2(queryRunner);
-			log(Common.dumpRows(queryRunner, "vehicle"));
+			log(dumpRows(queryRunner, "vehicle"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +59,7 @@ public class Update extends AbstractMain {
 	 * @throws SQLException
 	 */
 	private void doUpdate1(QueryRunner queryRunner) throws SQLException {
-		queryRunner.update("UPDATE vehicle SET id=?, colour=?", Common.generateRandomValue(), "Black");
+		queryRunner.update("UPDATE vehicle SET id=?, colour=?", generateRandomValue(), "Black");
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class Update extends AbstractMain {
 	 * @throws SQLException
 	 */
 	private void doUpdate2(QueryRunner queryRunner) throws SQLException {
-		queryRunner.update("UPDATE vehicle SET id=?, make=?, model=?, colour=?", Common.generateRandomValue(), "Ferrari", "458 Italia", "Black");
+		queryRunner.update("UPDATE vehicle SET id=?, make=?, model=?, colour=?", generateRandomValue(), "Ferrari", "458 Italia", "Black");
 	}
 
 }
