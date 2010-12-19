@@ -15,7 +15,7 @@ import org.apache.commons.dbutils.QueryRunner;
  * @author mkns
  * 
  */
-public class Update {
+public class Update extends AbstractMain {
 
 	/**
 	 * CLI needs main() method to run
@@ -40,14 +40,14 @@ public class Update {
 	 * 
 	 * @param args
 	 */
-	private void execute(String[] args) {
+	protected void execute(String[] args) {
 		try {
 			QueryRunner queryRunner = Common.getQueryRunner(Common.getDataSource());
-			Common.dumpRows(queryRunner, "vehicle");
+			log(Common.dumpRows(queryRunner, "vehicle"));
 			this.doUpdate1(queryRunner);
-			Common.dumpRows(queryRunner, "vehicle");
+			log(Common.dumpRows(queryRunner, "vehicle"));
 			this.doUpdate2(queryRunner);
-			Common.dumpRows(queryRunner, "vehicle");
+			log(Common.dumpRows(queryRunner, "vehicle"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

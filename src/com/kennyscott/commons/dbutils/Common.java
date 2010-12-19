@@ -39,15 +39,6 @@ public class Common {
 	}
 	
 	/**
-	 * I get tired of typing System.out.println()
-	 * 
-	 * @param text
-	 */
-	static protected void log(Object text) {
-		System.out.println(text);
-	}
-
-	/**
 	 * Returns a UUID stripped of hyphens
 	 * 
 	 * @return
@@ -88,13 +79,15 @@ public class Common {
 	 * @param tableName
 	 * @throws SQLException
 	 */
-	static protected void dumpRows(QueryRunner queryRunner, String tableName) throws SQLException {
+	static protected String dumpRows(QueryRunner queryRunner, String tableName) throws SQLException {
 		ResultSetHandler<List<Object[]>> rsh = new ArrayListHandler();
 
 		List<Object[]> result = queryRunner.query("SELECT * FROM " + tableName, rsh);
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < result.size(); i++) {
 			Object[] row = (Object[]) result.get(i);
-			Common.log(StringUtils.join(row, ","));
+			sb.append(StringUtils.join(row, ","));
 		}
+		return sb.toString();
 	}
 }

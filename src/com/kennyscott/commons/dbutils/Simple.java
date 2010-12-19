@@ -45,7 +45,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
  * @author mkns
  * 
  */
-public class Simple {
+public class Simple extends AbstractMain {
 
 	/**
 	 * It's a CLI class, so we need a main method.
@@ -64,7 +64,7 @@ public class Simple {
 	 * 
 	 * @param args
 	 */
-	private void execute(String[] args) {
+	protected void execute(String[] args) {
 		DataSource dataSource = null;
 		try {
 			dataSource = Common.getDataSource();
@@ -90,10 +90,10 @@ public class Simple {
 
 		List<Object[]> result = queryRunner.query("SELECT * FROM Person WHERE name=?", rsh, "John Doe");
 		for (int i = 0; i < result.size(); i++) {
-			Common.log("Row #" + i);
+			log("Row #" + i);
 			Object[] row = (Object[]) result.get(i);
 			for (int j = 0; j < row.length; j++) {
-				Common.log("Column #" + j + ": " + row[j]);
+				log("Column #" + j + ": " + row[j]);
 			}
 		}
 	}
@@ -113,7 +113,7 @@ public class Simple {
 		Iterator<PersonBean> i = rows.iterator();
 		while (i.hasNext()) {
 			PersonBean bean = i.next();
-			Common.log("Name: " + bean.getName() + " Age: " + bean.getAge());
+			log("Name: " + bean.getName() + " Age: " + bean.getAge());
 		}
 	}
 
