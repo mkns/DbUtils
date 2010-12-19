@@ -9,8 +9,20 @@ public abstract class AbstractMain {
 	 * 
 	 * @param text
 	 */
-	static protected void log(Object text) {
+	protected void log(Object text) {
 		System.out.println(text);
 	}
 
+	protected void sleep() {
+		sleep(5000);
+	}
+	
+	protected void sleep(long length) {
+		try {
+			Thread.sleep(length);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
