@@ -48,6 +48,8 @@ public class Update extends AbstractMain {
 			log(dumpRows(queryRunner, "vehicle"));
 			this.doUpdate2(queryRunner);
 			log(dumpRows(queryRunner, "vehicle"));
+			this.doUpdate3(queryRunner);
+			log(dumpRows(queryRunner, "vehicle"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -69,6 +71,11 @@ public class Update extends AbstractMain {
 	 */
 	private void doUpdate2(QueryRunner queryRunner) throws SQLException {
 		queryRunner.update("UPDATE vehicle SET id=?, make=?, model=?, colour=?", generateRandomValue(), "Ferrari", "458 Italia", "Black");
+	}
+
+	private void doUpdate3(QueryRunner queryRunner) throws SQLException {
+		Object[] params = { generateRandomValue(), "Porsche", "911 Turbo", "Red" };
+		queryRunner.update("UPDATE vehicle SET id=?, make=?, model=?, colour=?", params);
 	}
 
 }

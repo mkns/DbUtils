@@ -51,7 +51,7 @@ public abstract class AbstractMain {
 		MysqlDataSource ds = new MysqlDataSource();
 		ds.setUser("dbutils");
 		ds.setPassword("dbutils");
-		ds.setServerName("192.168.2.201");
+		ds.setServerName("172.30.30.72");
 		ds.setPortNumber(3306);
 		ds.setDatabaseName("dbutils");
 		return ds;
